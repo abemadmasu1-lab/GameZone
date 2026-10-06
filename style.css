@@ -1,0 +1,457 @@
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	background: #080810;
+	color: white;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	padding: 20px 60px;
+
+	background: #11111c;
+	border-bottom: 1px solid #252538;
+}
+
+header h1 {
+	font-size: 24px;
+}
+
+nav {
+	display: flex;
+	gap: 30px;
+}
+
+nav a {
+	color: #aaa;
+	text-decoration: none;
+	transition: 0.2s;
+}
+
+nav a:hover {
+	color: white;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    text-align: center;
+
+    padding: 140px 20px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #171735 0%,
+            #080810 60%
+        );
+}
+
+.hero h2 {
+    font-size: 64px;
+
+    margin-bottom: 20px;
+
+    letter-spacing: 2px;
+}
+
+.hero p {
+	color: #aaa;
+	font-size: 20px;
+	margin-bottom: 35px;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+button {
+	background: #6c5ce7;
+	color: white;
+
+	border: none;
+
+	padding: 15px 35px;
+
+	border-radius: 8px;
+
+	font-size: 18px;
+
+	cursor: pointer;
+
+	transition: 0.2s;
+}
+
+button:hover {
+	background: #5849d6;
+}
+
+
+/* =========================
+   GAMES SECTION
+========================= */
+
+.games {
+	padding: 70px 60px;
+	text-align: center;
+}
+
+.games h2 {
+	font-size: 35px;
+	margin-bottom: 40px;
+}
+
+.game-container {
+	display: grid;
+
+	grid-template-columns: repeat(3, 1fr);
+
+	gap: 25px;
+
+	max-width: 1100px;
+
+	margin: auto;
+}
+
+.game-card {
+    background: rgba(18, 18, 31, 0.9);
+
+    border: 1px solid #28283d;
+
+    border-radius: 18px;
+
+    padding: 40px 25px;
+
+    transition: 0.3s;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.game-card:hover {
+    border-color: #6c5ce7;
+
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 15px 40px rgba(108, 92, 231, 0.2);
+}
+
+.game-card:hover {
+	border-color: #6c5ce7;
+
+	transform: translateY(-5px);
+}
+
+.game-icon {
+    font-size: 60px;
+
+    margin-bottom: 20px;
+
+    transition: 0.3s;
+}
+
+.game-card:hover .game-icon {
+    transform: scale(1.15);
+}
+
+.game-card h3 {
+	font-size: 23px;
+
+	margin-bottom: 10px;
+}
+
+.game-card p {
+	color: #999;
+
+	margin-bottom: 25px;
+}
+
+
+/* =========================
+   PLAY BUTTON LINK
+========================= */
+
+.game-card a {
+	text-decoration: none;
+}
+
+
+/* =========================
+   TIC TAC TOE
+========================= */
+
+#board {
+	display: grid;
+
+	grid-template-columns: repeat(3, 100px);
+
+	grid-template-rows: repeat(3, 100px);
+
+	gap: 10px;
+
+	width: max-content;
+
+	margin: 30px auto;
+}
+
+.cell {
+	width: 100px;
+
+	height: 100px;
+
+	padding: 0;
+
+	background: #12121f;
+
+	border: 2px solid #28283d;
+
+	border-radius: 8px;
+
+	font-size: 40px;
+
+	font-weight: bold;
+
+	display: flex;
+
+	align-items: center;
+
+	justify-content: center;
+}
+
+.cell:hover {
+	background: #1b1b2d;
+
+	border-color: #6c5ce7;
+}
+
+
+/* =========================
+   RESTART BUTTON
+========================= */
+
+#restart {
+	margin-top: 20px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+	header {
+		padding: 20px;
+	}
+
+	.hero {
+		padding: 80px 20px;
+	}
+
+	.hero h2 {
+		font-size: 42px;
+	}
+
+	.games {
+		padding: 50px 20px;
+	}
+
+	.game-container {
+		grid-template-columns: 1fr;
+	}
+
+	nav {
+		gap: 15px;
+	}
+
+}
+/* =========================
+   MEMORY GAME
+========================= */
+
+#memory-board {
+    display: grid !important;
+
+    grid-template-columns: repeat(4, 100px) !important;
+    grid-template-rows: repeat(2, 100px) !important;
+
+    gap: 10px;
+
+    width: 430px;
+
+    margin: 30px auto;
+}
+
+.memory-card {
+    width: 100px !important;
+    height: 100px !important;
+
+    padding: 0;
+
+    background: #12121f;
+
+    border: 2px solid #28283d;
+
+    border-radius: 10px;
+
+    font-size: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.memory-card:hover {
+    background: #1b1b2d;
+
+    border-color: #6c5ce7;
+}
+
+.memory-card.matched {
+    background: #241f4d;
+
+    border-color: #6c5ce7;
+}
+/* =========================
+   GAMING BACKGROUND EFFECT
+========================= */
+
+body {
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            #15152d 0,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 80% 70%,
+            #17152f 0,
+            transparent 35%
+        ),
+        #080810;
+}
+/* =========================
+   GAME COUNT
+========================= */
+
+.game-count {
+    display: inline-block;
+
+    margin-bottom: 20px;
+
+    padding: 8px 18px;
+
+    background: #12121f;
+
+    border: 1px solid #28283d;
+
+    border-radius: 30px;
+
+    color: #aaa;
+
+    font-size: 14px;
+}
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    text-align: center;
+
+    padding: 50px 20px;
+
+    margin-top: 60px;
+
+    background: #11111c;
+
+    border-top: 1px solid #252538;
+}
+
+footer h3 {
+    font-size: 24px;
+
+    margin-bottom: 12px;
+}
+
+footer p {
+    color: #777;
+
+    margin: 8px 0;
+}
+/* =========================
+   LEADERBOARD
+========================= */
+
+.leaderboard {
+    max-width: 800px;
+
+    margin: 0 auto 80px;
+
+    padding: 0 20px;
+}
+
+.leaderboard-row {
+    display: grid;
+
+    grid-template-columns: 1fr 2fr 1fr;
+
+    align-items: center;
+
+    padding: 20px;
+
+    margin-bottom: 10px;
+
+    background: #12121f;
+
+    border: 1px solid #28283d;
+
+    border-radius: 10px;
+
+    color: #ddd;
+
+    text-align: center;
+
+    transition: 0.2s;
+}
+
+.leaderboard-row:hover {
+    border-color: #6c5ce7;
+
+    transform: translateX(5px);
+}
+
+.header-row {
+    background: #6c5ce7;
+
+    color: white;
+
+    font-weight: bold;
+
+    border-color: #6c5ce7;
+}
+
+.header-row:hover {
+    transform: none;
+}

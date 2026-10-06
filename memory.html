@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Memory Game - GameZone</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<h1>🎮 GameZone</h1>
+		<nav>
+			<a href="index.html">Home</a>
+			<a href="index.html">Games</a>
+			<a href="#">Leaderboard</a>
+		</nav>
+	</header>
+
+	<main>
+		<section class="hero">
+			<h2>🧠 Memory Game</h2>
+			<p id="status">Find all matching pairs!</p>
+			<div id="memory-board"></div>
+			<button id="restart">Restart Game</button>
+		</section>
+	</main>
+
+	<script>
+		const board = document.getElementById("memory-board");
+		const status = document.getElementById("status");
+		const restart = document.getElementById("restart");
+
+		const symbols = ["🎮", "🎮", "🐍", "🐍", "⚽", "⚽", "🚀", "🚀"];
+		let cards = [];
+		let firstCard = null;
+		let secondCard = null;
+		let locked = false;
+		let matches = 0;
+
+		function shuffle(array) {
+			for (let i = array.length - 1; i > 0; i--) {
+				const j = Math.floor(Math.random() * (i + 1));
+				[array[i], array[j]] = [array[j], array[i]];
+			}
+			return array;
+		}
+
+		function createGame() {
+			board.innerHTML = "";
+			cards = shuffle([...symbols]);
+			firstCard = null;
+			secondCard = null;
+			locked = false;
+			matches = 0;
+			status.textContent = "Find all matching pairs!";
+
+			cards.forEach((symbol, index) => {
+				const card = document.createElement("button");
+				card.type = "button";
+				card.classList.add("memory-card");
+				card.dataset.symbol = symbol;
+				card.dataset.index = index;
+				card.textContent = "?";
+				card.setAttribute("aria-label", "Hidden card");
+				card.addEventListener("click", flipCard);
+				board.appendChild(card);
+			});
+		}
+
+		function flipCard() {
+			if (locked || this === firstCard || this.classList.contains("matched")) {
+				return;
+			}
+
+			this.textContent = this.dataset.symbol;
+			this.setAttribute("aria-label", this.dataset.symbol);
+
+			if (!firstCard) {
+				firstCard = this;
+				return;
+			}
+
+			secondCard = this;
+			locked = true;
+
+			if (firstCard.dataset.symbol === secondCard.dataset.symbol) {
+				firstCard.classList.add("matched");
+				secondCard.classList.add("matched");
+				firstCard.setAttribute("aria-label", `Matched ${firstCard.dataset.symbol}`);
+				secondCard.setAttribute("aria-label", `Matched ${secondCard.dataset.symbol}`);
+				matches++;
+				resetTurn();
+
+				if (matches === symbols.length / 2) {
+					status.textContent = "You won! 🎉";
+				}
+			} else {
+				const unmatchedCards = [firstCard, secondCard];
+				setTimeout(() => {
+					unmatchedCards.forEach(card => {
+						card.textContent = "?";
+						card.setAttribute("aria-label", "Hidden card");
+					});
+					resetTurn();
+				}, 800);
+			}
+		}
+
+		function resetTurn() {
+			firstCard = null;
+			secondCard = null;
+			locked = false;
+		}
+
+		restart.addEventListener("click", createGame);
+		createGame();
+	</script>
+</body>
+</html>

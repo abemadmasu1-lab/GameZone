@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tic Tac Toe - GameZone</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<h1>🎮 GameZone</h1>
+		<nav>
+			<a href="index.html">Home</a>
+			<a href="index.html">Games</a>
+			<a href="#">Leaderboard</a>
+		</nav>
+	</header>
+
+	<main>
+		<section class="hero">
+			<h2>Tic Tac Toe</h2>
+			<p id="status">Your turn — X</p>
+			<div id="board">
+				<button class="cell"></button>
+				<button class="cell"></button>
+				<button class="cell"></button>
+				<button class="cell"></button>
+				<button class="cell"></button>
+				<button class="cell"></button>
+				<button class="cell"></button>
+				<button class="cell"></button>
+				<button class="cell"></button>
+			</div>
+			<button id="restart">Restart Game</button>
+		</section>
+	</main>
+
+	<script>
+		const cells = document.querySelectorAll(".cell");
+		const status = document.getElementById("status");
+		const restart = document.getElementById("restart");
+
+		let currentPlayer = "X";
+		let gameActive = true;
+
+		const winningCombinations = [
+			[0, 1, 2], [3, 4, 5], [6, 7, 8],
+			[0, 3, 6], [1, 4, 7], [2, 5, 8],
+			[0, 4, 8], [2, 4, 6]
+		];
+
+		cells.forEach((cell) => {
+			cell.addEventListener("click", () => {
+				if (cell.textContent !== "" || !gameActive) return;
+
+				cell.textContent = currentPlayer;
+				checkWinner();
+
+				if (gameActive) {
+					currentPlayer = currentPlayer === "X" ? "O" : "X";
+					status.textContent = "Your turn — " + currentPlayer;
+				}
+			});
+		});
+
+		function checkWinner() {
+			for (const combination of winningCombinations) {
+				const [a, b, c] = combination.map((index) => cells[index].textContent);
+				if (a !== "" && a === b && b === c) {
+					status.textContent = a + " wins! 🎉";
+					gameActive = false;
+					return;
+				}
+			}
+
+			const draw = [...cells].every((cell) => cell.textContent !== "");
+			if (draw) {
+				status.textContent = "It's a draw!";
+				gameActive = false;
+			}
+		}
+
+		restart.addEventListener("click", () => {
+			cells.forEach((cell) => {
+				cell.textContent = "";
+			});
+			currentPlayer = "X";
+			gameActive = true;
+			status.textContent = "Your turn — X";
+		});
+	</script>
+</body>
+</html>
